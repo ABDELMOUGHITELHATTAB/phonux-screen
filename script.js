@@ -21,7 +21,7 @@ const BRANDS = [
     id: "samsung",
     name: "Samsung",
     description: "Protection d'écran Samsung",
-    logo: "sam",
+    logo: "S",
     models: [
       "Galaxy A12",
       "Galaxy A02",
@@ -251,7 +251,7 @@ const BRANDS = [
     id: "iphone",
     name: "iPhone",
     description: "Protection d'écran Apple iPhone",
-    logo: "ip",
+    logo: "●",
     models: [
       "iPhone X",
       "iPhone XS",
@@ -689,7 +689,7 @@ function renderCart() {
   const hint = getElement("priceHint");
 
   if (totalQuantity >= WHOLESALE_MINIMUM) {
-    hint.textContent = "استافدتي من ثمن الجملة: 4 DH للوحدة.";
+    hint.textContent = "استافدتي من ثمن الجملة: 4.50 DH للوحدة.";
   } else {
     const remaining = WHOLESALE_MINIMUM - totalQuantity;
 
@@ -726,7 +726,7 @@ function buildWhatsAppMessage(customer) {
   const totalPrice = totalQuantity * unitPrice;
 
   const lines = [
-    " *طلب جديد - PHONUXE*",
+    "🛍️ *طلب جديد - PHONUXE*",
     "",
     "*معلومات الزبون:*",
     "الاسم: " + customer.name,
@@ -752,7 +752,7 @@ function buildWhatsAppMessage(customer) {
     "ثمن الوحدة: " + formatMoney(unitPrice),
     "الثمن الإجمالي: " + formatMoney(totalPrice),
     "",
-    "شكراً PHONUXE.",
+    "شكراً على اختيار PHONUXE.",
   );
 
   return lines.join("\n");
@@ -866,6 +866,7 @@ function init() {
   renderCatalog();
   renderCart();
   setupEvents();
+  setupThemeToggle();
 
   // Afficher uniquement les 10 premiers modèles
   // du premier onglet "Tous".
@@ -876,4 +877,41 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", init);
 } else {
   init();
+}
+
+/* ========================================
+   THEME SWITCH: MODE JOUR / MODE NUIT
+======================================== */
+function setupThemeToggle() {
+  const button = document.getElementById("themeToggle");
+  if (!button) return;
+
+  let savedTheme = "dark";
+  try {
+    savedTheme = localStorage.getItem("phonuxe-theme") || "dark";
+  } catch (_) {}
+
+  function applyTheme(theme) {
+    const isLight = theme === "light";
+    document.body.dataset.theme = isLight ? "light" : "dark";
+    button.innerHTML = isLight
+      ? "🌙 <span>الوضع الليلي</span>"
+      : "☀️ <span>الوضع النهاري</span>";
+    button.setAttribute(
+      "aria-label",
+      isLight ? "Passer au mode sombre" : "Passer au mode clair",
+    );
+    button.setAttribute("aria-pressed", String(isLight));
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme)
+      metaTheme.setAttribute("content", isLight ? "#f4f7f5" : "#101827");
+    try {
+      localStorage.setItem("phonuxe-theme", theme);
+    } catch (_) {}
+  }
+
+  applyTheme(savedTheme === "light" ? "light" : "dark");
+  button.addEventListener("click", function () {
+    applyTheme(document.body.dataset.theme === "light" ? "dark" : "light");
+  });
 }

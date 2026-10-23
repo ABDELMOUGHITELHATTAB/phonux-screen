@@ -1217,3 +1217,158 @@ textarea:focus {
   background: var(--accent);
   color: #ffffff;
 }
+
+/* ========================================
+   THEME SWITCH: MODE JOUR / MODE NUIT
+======================================== */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.theme-toggle:hover { border-color: var(--accent-light); }
+body, .topbar, .price-strip, .catalog-section, .order-section, .footer,
+.model-card, .cart-panel, .checkout-panel, .brand-tab, .search-box,
+.field input, .field textarea {
+  transition: background-color .22s ease, color .22s ease, border-color .22s ease;
+}
+
+body[data-theme="light"] {
+  --bg: #f4f7f5;
+  --surface: #ffffff;
+  --surface-light: #e8efeb;
+  --border: rgba(20, 45, 34, .14);
+  --text: #18231d;
+  --muted: #5f6f65;
+  --accent: #117b5d;
+  --accent-light: #168568;
+  --green: #168568;
+}
+body[data-theme="light"] .topbar { background: rgba(255,255,255,.94); }
+body[data-theme="light"] .header-contact { color: #263d31; }
+body[data-theme="light"] .theme-toggle { background: #ffffff; color: #18231d; }
+body[data-theme="light"] .price-strip,
+body[data-theme="light"] .model-card,
+body[data-theme="light"] .cart-panel,
+body[data-theme="light"] .checkout-panel,
+body[data-theme="light"] .search-box,
+body[data-theme="light"] .field input,
+body[data-theme="light"] .field textarea,
+body[data-theme="light"] .brand-tab { background-color: #ffffff; color: #18231d; }
+body[data-theme="light"] .footer { background: #e8efeb; }
+body[data-theme="light"] .footer-socials a { color: #30483b; }
+body[data-theme="light"] .brand-tab.active { background: var(--accent); color: #ffffff; }
+body[data-theme="light"] .featured-price { background: #e4f4ec; }
+body[data-theme="light"] .hero-visual .phone-back { background: linear-gradient(145deg, #d8e3dd, #aabbb1); }
+body[data-theme="light"] .hero-visual .phone-front { background: linear-gradient(145deg, #ffffff, #dce8e1); }
+body[data-theme="light"] .hero-visual .phone-mark { color: #168568; }
+
+@media (max-width: 560px) {
+  .header-actions { gap: 8px; }
+  .theme-toggle { padding: 8px 9px; font-size: 11px; }
+  .theme-toggle span { display: none; }
+  .header-contact { font-size: 11px; gap: 6px; }
+}
+
+/* PHONUXE light mode fixes: model phone icons and quantity controls */
+body[data-theme="light"] .model-device {
+  border-color: #168568;
+  background: linear-gradient(145deg, #e1f4e9, #b9dfc9);
+}
+body[data-theme="light"] .model-device::before {
+  background: #168568;
+}
+body[data-theme="light"] .quantity-control {
+  background: #f1f7f3;
+  border-color: rgba(20, 80, 52, .2);
+}
+body[data-theme="light"] .quantity-control button {
+  background: #d8eee1;
+  color: #145c3b;
+}
+body[data-theme="light"] .quantity-control button:hover {
+  background: #b9dfc9;
+  color: #0b4228;
+}
+body[data-theme="light"] .quantity-control output {
+  color: #18231d;
+}
+
+/* PHONUXE — final light-mode contrast fixes */
+body[data-theme="light"] .price-strip {
+  background: #ffffff !important;
+  border-color: rgba(20, 80, 52, .16) !important;
+  color: #18231d !important;
+}
+body[data-theme="light"] .price-info {
+  background: #f6faf7 !important;
+  color: #18231d !important;
+}
+body[data-theme="light"] .price-info strong,
+body[data-theme="light"] .price-info small,
+body[data-theme="light"] .price-info div,
+body[data-theme="light"] .price-info > b,
+body[data-theme="light"] .price-note {
+  color: #18231d !important;
+}
+body[data-theme="light"] .price-info small,
+body[data-theme="light"] .price-note {
+  color: #5f6f65 !important;
+}
+body[data-theme="light"] .price-icon {
+  background: #d8eee1 !important;
+  color: #145c3b !important;
+}
+body[data-theme="light"] .featured-price {
+  background: #e4f4ec !important;
+  border-color: rgba(22, 133, 104, .24) !important;
+}
+body[data-theme="light"] .model-card .model-subtitle {
+  color: #5f6f65 !important;
+}
+body[data-theme="light"] .model-device {
+  border-color: #168568 !important;
+  background: linear-gradient(145deg, #e1f4e9, #b9dfc9) !important;
+}
+body[data-theme="light"] .model-device::before {
+  background: #168568 !important;
+}
+body[data-theme="light"] .quantity-control {
+  background: #f1f7f3 !important;
+  border-color: rgba(20, 80, 52, .2) !important;
+}
+body[data-theme="light"] .quantity-control button {
+  background: #d8eee1 !important;
+  color: #145c3b !important;
+}
+body[data-theme="light"] .quantity-control button:hover {
+  background: #b9dfc9 !important;
+  color: #0b4228 !important;
+}
+body[data-theme="light"] .quantity-control output {
+  color: #18231d !important;
+}
+
+/* PHONUXE — floating label light-mode contrast fix */
+body[data-theme="light"] .floating-label {
+  background: rgba(255, 255, 255, .96) !important;
+  color: #117b5d !important;
+  border-color: rgba(17, 123, 93, .28) !important;
+  box-shadow: 0 4px 14px rgba(17, 70, 48, .10);
+}
