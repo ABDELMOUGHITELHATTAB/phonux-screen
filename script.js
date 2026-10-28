@@ -253,6 +253,10 @@ const BRANDS = [
     description: "Protection d'écran Apple iPhone",
     logo: "●",
     models: [
+      "iPhone 7G",
+      "iPhone 7 plus",
+      "iPhone 8 plus",
+      "iPhone 8G",
       "iPhone X",
       "iPhone XS",
       "iPhone XR",
